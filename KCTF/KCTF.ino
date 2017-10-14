@@ -4,12 +4,12 @@
  Author:	MIKUDAYO
 */
 
-// the setup function runs once when you press reset or power the board
-
 #define LED 13	//LED핀
 #define IR 2	//IR센서 핀
 #define LIMIT (POINTNUM * 1)		//LIMIT설정
 #define POINTNUM 4		//한 판에 표시 개수
+
+// the setup function runs once when you press reset or power the board
 
 volatile unsigned int count = 0;	//인터럽트에서 사용하기 위해 volatile 붙임
 unsigned int oldcount = 0, newcount = 0;
