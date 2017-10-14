@@ -1,7 +1,7 @@
 ﻿/*
  Name:		KCTF.ino
  Created:	2017-10-13 오후 9:28:44
- Author:	MIKUDAYO
+ Author:	Joosung Park
 */
 
 #define LED 13	//LED핀
