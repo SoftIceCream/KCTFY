@@ -12,7 +12,7 @@
 // the setup function runs once when you press reset or power the board
 
 volatile unsigned int count = 0;	//인터럽트에서 사용하기 위해 volatile 붙임
-unsigned int oldcount = 0, newcount = 0;
+unsigned long int oldcount = 0, newcount = 0;
 long int sameCount = 0;	//같은지 여부 검사(변함이 없으면 0.2초마다 1씩 증가, 5번 실행되면,즉 1초 후 초기화)
 bool isOver = false;
 
@@ -54,5 +54,11 @@ void loop() {
 	{
 		digitalWrite(LED, HIGH);
 
+	}
+	
+	if ((oldcount>=65535)||(newcount>=65535))
+	{
+		oldcount = 0;
+		newcount = 0;
 	}
 }
