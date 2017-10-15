@@ -13,7 +13,7 @@
 
 volatile unsigned int count = 0;	//인터럽트에서 사용하기 위해 volatile 붙임
 unsigned int oldcount = 0, newcount = 0;
-short int sameCount = 0;	//같은지 여부 검사(변함이 없으면 0.2초마다 1씩 증가, 5번 실행되면,즉 1초 후 초기화)
+long int sameCount = 0;	//같은지 여부 검사(변함이 없으면 0.2초마다 1씩 증가, 5번 실행되면,즉 1초 후 초기화)
 bool isOver = false;
 
 void irCount() {
