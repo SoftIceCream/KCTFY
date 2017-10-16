@@ -44,16 +44,13 @@ void loop() {
 	if ((oldcount+LIMIT) >= newcount)
 	{
 		isOver = true;
-	}
-	else
-	{
+	}else{
 		isOver = false;
 	}
 
 	if (isOver==true)
 	{
 		digitalWrite(LED, HIGH);
-
 	}
 	
 	if ((oldcount>=65535)||(newcount>=65535))
