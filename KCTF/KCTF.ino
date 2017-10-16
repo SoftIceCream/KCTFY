@@ -4,58 +4,69 @@
  Author:	Joosung Park
 */
 
-#define LED 13	//LED핀
+#define LED 4	//LED핀
 #define IR 2	//IR센서 핀
-#define LIMIT (POINTNUM * 1)		//LIMIT설정
-#define POINTNUM 4		//한 판에 표시 개수
+#define LIMIT 2		//LIMIT설정
+#define BUZZ 5	//버저 핀
 
 // the setup function runs once when you press reset or power the board
 
 volatile unsigned int count = 0;	//인터럽트에서 사용하기 위해 volatile 붙임
 unsigned long int oldcount = 0, newcount = 0;
-long int sameCount = 0;	//같은지 여부 검사(변함이 없으면 0.2초마다 1씩 증가, 5번 실행되면,즉 1초 후 초기화)
 bool isOver = false;
 
+unsigned long previousMillis = 0, loopPMillis = 0, unlPMillis = 0;
+const long interval = 100, loopInterval = 200, unlockInterval = 1000;
+
 void irCount() {
-	count += 1;
+	unsigned long currentMillis = millis();
+	if (currentMillis - previousMillis >= interval) {
+		previousMillis = currentMillis;
+		count += 1;
+	}
 }
 
 void setup() {
 	pinMode(LED, OUTPUT);	//LED핀 출력
 	pinMode(IR, INPUT);	//IR센서 입력
-	attachInterrupt(digitalPinToInterrupt(IR), irCount, RISING);	//인터럽트 활성화, LOW에서 HIGH로 올라갈 때 인터럽트 활성화
+	attachInterrupt(0, irCount, RISING);
+	Serial.begin(115200);
 }
 
 // the loop function runs over and over again until power down or reset
 void loop() {
+	
 	oldcount = count;
-	delay(200);
-	newcount = count;
+	unsigned long currentMillis = millis();
 
-	if (oldcount==newcount)
-	{
-		sameCount++;
-		if (sameCount>=5)
-		{
-			count = 0;	//1초동안 변함이 없으면 초기화
-		}
+	if (currentMillis - loopPMillis >= loopInterval) {
+		loopPMillis = currentMillis;
+		
+		newcount = count;
 	}
 
-	if ((oldcount+LIMIT) >= newcount)
+	currentMillis = millis();
+
+	if (currentMillis - unlPMillis >= unlockInterval)
+	{
+		unlPMillis = currentMillis;
+		count = 0;
+		isOver = false;
+		Serial.println("It's OK!!");
+	}
+
+	if ((oldcount+LIMIT) < newcount)
 	{
 		isOver = true;
-	}else{
-		isOver = false;
 	}
 
 	if (isOver==true)
 	{
+		Serial.println("It's OVER!!");
+		tone(BUZZ, 440, 200);
 		digitalWrite(LED, HIGH);
-	}
-	
-	if ((oldcount>=65535)||(newcount>=65535))
-	{
-		oldcount = 0;
-		newcount = 0;
+		delay(100);
+	}else{
+		digitalWrite(LED, LOW);
 	}
 }
