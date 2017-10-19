@@ -28,8 +28,6 @@ void MAGCount() {
 	}
 }
 
-
-
 void setup() {
 	pinMode(LED, OUTPUT);	//LED핀 출력
 	pinMode(MAG, INPUT);	//MAG센서 입력
