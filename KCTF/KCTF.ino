@@ -4,32 +4,36 @@
  Author:	Joosung Park
 */
 
-#define LED 4	//LED핀
-#define IR 2	//IR센서 핀
+#define LED 13	//LED핀
+#define MAG 2	//MAG센서 핀
 #define LIMIT 2		//LIMIT설정
 #define BUZZ 5	//버저 핀
 
 // the setup function runs once when you press reset or power the board
 
-volatile unsigned int count = 0;	//인터럽트에서 사용하기 위해 volatile 붙임
+volatile unsigned int count = 0, total = 0;	//인터럽트에서 사용하기 위해 volatile 붙임
 unsigned long int oldcount = 0, newcount = 0;
 bool isOver = false;
 
 unsigned long previousMillis = 0, loopPMillis = 0, unlPMillis = 0;
-const long interval = 100, loopInterval = 200, unlockInterval = 1000;
+const long interval = 150, loopInterval = 200, unlockInterval = 1000;
 
-void irCount() {
+void MAGCount() {
 	unsigned long currentMillis = millis();
 	if (currentMillis - previousMillis >= interval) {
 		previousMillis = currentMillis;
-		count += 1;
+		count++;
+		total++;
+		Serial.println("Gotcha");
 	}
 }
 
+
+
 void setup() {
 	pinMode(LED, OUTPUT);	//LED핀 출력
-	pinMode(IR, INPUT);	//IR센서 입력
-	attachInterrupt(0, irCount, RISING);
+	pinMode(MAG, INPUT);	//MAG센서 입력
+	attachInterrupt(0, MAGCount, FALLING);
 	Serial.begin(115200);
 }
 
@@ -52,20 +56,22 @@ void loop() {
 		unlPMillis = currentMillis;
 		count = 0;
 		isOver = false;
-		Serial.println("It's OK!!");
+		Serial.println("\rIt's OK!!");
 	}
 
-	if ((oldcount+LIMIT) < newcount)
+	if ((oldcount+LIMIT) <= newcount)
 	{
 		isOver = true;
 	}
 
 	if (isOver==true)
 	{
+		noInterrupts();
 		Serial.println("It's OVER!!");
-		tone(BUZZ, 440, 200);
+		tone(BUZZ, 440, 100);
 		digitalWrite(LED, HIGH);
 		delay(100);
+		interrupts();
 	}else{
 		digitalWrite(LED, LOW);
 	}
