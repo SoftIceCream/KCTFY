@@ -64,12 +64,10 @@ void loop() {
 
 	if (isOver==true)
 	{
-		noInterrupts();
 		Serial.println("It's OVER!!");
-		tone(BUZZ, 440, 100);
+		tone(BUZZ, 440, 200);
 		digitalWrite(LED, HIGH);
 		delay(100);
-		interrupts();
 	}else{
 		digitalWrite(LED, LOW);
 	}
