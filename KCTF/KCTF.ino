@@ -16,10 +16,11 @@ unsigned long int oldcount = 0, newcount = 0;
 bool isOver = false;
 
 unsigned long previousMillis = 0, loopPMillis = 0, unlPMillis = 0;
-const long interval = 150, loopInterval = 200, unlockInterval = 1000;
+const short interval = 150, loopInterval = 200, unlockInterval = 1000;
 
 void MAGCount() {
 	unsigned long currentMillis = millis();
+
 	if (currentMillis - previousMillis >= interval) {
 		previousMillis = currentMillis;
 		count++;
@@ -31,7 +32,7 @@ void MAGCount() {
 void setup() {
 	pinMode(LED, OUTPUT);	//LED핀 출력
 	pinMode(MAG, INPUT);	//MAG센서 입력
-	attachInterrupt(0, MAGCount, FALLING);
+	attachInterrupt(0, MAGCount, RISING);
 	Serial.begin(115200);
 }
 
