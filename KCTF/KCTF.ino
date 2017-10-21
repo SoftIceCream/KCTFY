@@ -4,9 +4,9 @@
  Author:	Joosung Park
 */
 
-#define LED 13	//LED핀
+#define LED 12	//LED핀
 #define MAG 2	//MAG센서 핀
-#define LIMIT 2		//LIMIT설정
+#define LIMIT 3	//LIMIT설정
 #define BUZZ 5	//버저 핀
 
 // the setup function runs once when you press reset or power the board
