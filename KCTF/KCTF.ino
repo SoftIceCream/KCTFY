@@ -11,12 +11,12 @@
 
 // the setup function runs once when you press reset or power the board
 
-volatile unsigned int count = 0, total = 0;	//인터럽트에서 사용하기 위해 volatile 붙임
+volatile unsigned int count = 0;//, total = 0;	//인터럽트에서 사용하기 위해 volatile 붙임
 unsigned long int oldcount = 0, newcount = 0;
 bool isOver = false;
 
 unsigned long previousMillis = 0, loopPMillis = 0, unlPMillis = 0;
-const short interval = 150, loopInterval = 200, unlockInterval = 1000;
+const short interval = 10, loopInterval = 200, unlockInterval = 1000;
 
 void MAGCount() {
 	unsigned long currentMillis = millis();
@@ -24,7 +24,7 @@ void MAGCount() {
 	if (currentMillis - previousMillis >= interval) {
 		previousMillis = currentMillis;
 		count++;
-		total++;
+		//total++;
 		Serial.println("Gotcha");
 	}
 }
