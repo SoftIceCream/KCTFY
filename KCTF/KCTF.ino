@@ -9,8 +9,6 @@
 #define LIMIT 3	//LIMIT설정
 #define BUZZ 5	//버저 핀
 
-// the setup function runs once when you press reset or power the board
-
 volatile unsigned int count = 0;//, total = 0;	//인터럽트에서 사용하기 위해 volatile 붙임
 unsigned long int oldcount = 0, newcount = 0;
 bool isOver = false;
