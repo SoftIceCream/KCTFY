@@ -4,7 +4,7 @@
  Author:	Joosung Park
 */
 
-#define LED 12	//LED핀
+#define LED 5	//LED핀
 #define MAG 2	//MAG센서 핀
 #define LIMIT 3	//LIMIT설정
 #define BUZZ 5	//버저 핀
