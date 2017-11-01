@@ -6,8 +6,8 @@
 
 #define LED 5	//LED핀
 #define MAG 2	//MAG센서 핀
-#define LIMIT 3	//LIMIT설정
-#define BUZZ 5	//버저 핀
+#define LIMIT 2	//LIMIT설정
+#define BUZZ 3	//버저 핀
 
 // the setup function runs once when you press reset or power the board
 
@@ -16,7 +16,7 @@ unsigned long int oldcount = 0, newcount = 0;
 bool isOver = false;
 
 unsigned long previousMillis = 0, loopPMillis = 0, unlPMillis = 0;
-const short interval = 10, loopInterval = 200, unlockInterval = 1000;
+const short interval = 10, loopInterval = 200, unlockInterval = 500;
 
 void MAGCount() {
 	unsigned long currentMillis = millis();
