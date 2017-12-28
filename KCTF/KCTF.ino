@@ -1,7 +1,7 @@
 ﻿/*
  Name:		KCTF.ino
  Created:	2017-10-13 오후 9:28:44
- Author:	Joosung Park
+ Author:	Joosung Park & 10201 강민수(BetaMan, skymins04)
 */
 
 #define LED 12	//LED핀
