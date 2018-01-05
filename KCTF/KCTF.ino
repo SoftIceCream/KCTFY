@@ -1,11 +1,11 @@
 ﻿/*
  Name:		KCTF.ino
  Created:	2017-10-13 오후 9:28:44
- Author:	Joosung Park & 10201 강민수(BetaMan, skymins04)
+ Author:	Joosung Park & BetaMan
 */
 
 #define LED 12	//LED핀
-#define MAG 2	//MAG센서 핀
+#define MAG 2	//리드센서 핀
 #define LIMIT 3	//LIMIT설정
 #define BUZZ 5	//버저 핀
 
