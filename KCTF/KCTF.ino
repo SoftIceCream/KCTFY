@@ -1,7 +1,7 @@
 ﻿/*
  Name:		KCTF.ino
  Created:	2017-10-13 오후 9:28:44
- Author:	Joosung Park & BetaMan
+ Author:	Joosung Park & BetaMan(Minsu Kang)
 */
 
 #define LED 12	//LED핀
@@ -36,13 +36,13 @@ void setup() {
 
 // the loop function runs over and over again until power down or reset
 void loop() {
-	
+
 	oldcount = count;
 	unsigned long currentMillis = millis();
 
 	if (currentMillis - loopPMillis >= loopInterval) {
 		loopPMillis = currentMillis;
-		
+
 		newcount = count;
 	}
 
